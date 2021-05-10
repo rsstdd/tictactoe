@@ -1,0 +1,100 @@
+html,
+body,
+.board {
+  align-items: center;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.cell {
+  cursor: pointer;
+  display: flex;
+  border-bottom: 0.15rem solid #333;
+  height: 4rem;
+  text-align: center;
+  width: 4rem;
+  font-size: 2rem;
+}
+
+[data-rowid="1"] .cell {
+  border-top: unset;
+}
+
+[data-rowid="3"] .cell {
+  border-bottom: unset;
+}
+
+.cell:not(:last-of-type) {
+  border-right: 0.15rem solid black;
+}
+
+.cell__x {
+  color: #ff8443;
+}
+
+.cell__o {
+  color: #57618d;
+}
+
+.cell__text {
+  animation: fadeIn ease 1s;
+  flex: 1;
+  line-height: 0;
+}
+
+.win-banner {
+  align-items: center;
+  animation: fadeIn ease 3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+}
+
+.win-banner__text {
+  font-weight: bold;
+  text-align: center;
+}
+
+.reset-button {
+  background-color: #fff;
+  color: #d63f1c;
+  border: none;
+  margin: 1rem;
+  max-width: 15rem;
+  min-width: 10rem;
+  padding: 1rem 2rem;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

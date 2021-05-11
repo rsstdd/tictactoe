@@ -1,7 +1,7 @@
 (() => {
-  let ACTIVE_PLAYER = 1;
-  let ACTIVE_CHARACTER = ACTIVE_PLAYER === 0 ? "O" : "X";
-  const BANNER_TEXT = `${ACTIVE_CHARACTER} is the Winner!`;
+  const CHAR_X = "X";
+  const CHAR_O = "O";
+  let ACTIVE_CHARACTER = CHAR_X;
   const BUTTON_TEXT = "Reset";
   const GRID = [
     [ { id: 1 }, { id: 2 }, { id: 3 }, ],
@@ -57,7 +57,7 @@
   const createWinnerBanner = () => {
     const bannerEl = document.createElement("div");
     const bannerTxt = document.createElement("h1");
-    bannerTxt.textContent = BANNER_TEXT;
+    bannerTxt.textContent = `${ACTIVE_CHARACTER} is the Winner!`;
     bannerTxt.setAttribute("class", "win-banner__text");
     winnerBannerEl.removeAttribute("class", "hidden");
     bannerEl.appendChild(bannerTxt);
@@ -110,7 +110,10 @@
   };
 
   const setClassOnCell = el => {
-    const className = ACTIVE_PLAYER === 0 ? "cell cell__o" : "cell cell__x";
+    const className = ACTIVE_CHARACTER === CHAR_O
+      ? "cell cell__o"
+      : "cell cell__x";
+
     return el.setAttribute("class", className);
   }
 
@@ -123,12 +126,11 @@
   };
 
   const updatePlayer = () => {
-    ACTIVE_PLAYER = ACTIVE_PLAYER === 0 ? 1 : 0;
-    ACTIVE_CHARACTER = ACTIVE_PLAYER === 0 ? "O" : "X";
+    ACTIVE_CHARACTER = ACTIVE_CHARACTER === CHAR_X ? CHAR_O : CHAR_X;
   };
 
   const updatePlayerGuesses = cellId => {
-    if (ACTIVE_PLAYER === 0) {
+    if (ACTIVE_CHARACTER === CHAR_O) {
       O_GUESSES.push(cellId)
     } else {
       X_GUESSES.push(cellId);
@@ -136,8 +138,7 @@
   }
 
   const resetGame = () => {
-    ACTIVE_PLAYER = 1;
-    ACTIVE_CHARACTER = ACTIVE_PLAYER === 0 ? "O" : "X";
+    ACTIVE_CHARACTER = ACTIVE_CHARACTER === CHAR_O ? "O" : "X";
     O_GUESSES = new Array();
     X_GUESSES = new Array();
 
